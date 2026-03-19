@@ -1,6 +1,10 @@
 package level1;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
+
 import javax.sound.sampled.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,10 +21,11 @@ public final class Assets {
     private static Clip loopingClip;
 
     public static BufferedImage loadImage(String resourceName) {
-        String path = "/" + resourceName;
-        try (InputStream in = Assets.class.getResourceAsStream(path)) {
-            if (in == null) throw new IOException("Missing resource: " + path);
-            return ImageIO.read(in);
+        String path = "content/" + resourceName;
+        System.out.println("path " + path);
+
+        try {
+            return ImageIO.read(new File(path));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load image: " + path, e);
         }
